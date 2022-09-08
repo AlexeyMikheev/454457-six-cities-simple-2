@@ -2,11 +2,12 @@ import { CliCommandInterface } from './cli-command.interface.js';
 import TextColor from '../utils/text-color.js';
 import FileReader from '../utils/file-reader.js';
 import JsonParse from '../utils/json-parser.js';
+import { CommandType } from '../types/command-type.enum.js';
 
 const EMPTY_VERSION = 'Не определена';
 
 export default class VersionCommand implements CliCommandInterface {
-  public readonly name: string = '--version';
+  public readonly name: CommandType.Version = CommandType.Version;
 
   private readVersion(): string {
     let version: string = EMPTY_VERSION;
