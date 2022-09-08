@@ -1,13 +1,14 @@
+import { Nullable } from '../../types/nullable-type.js';
 import TextColor from '../text-color.js';
-import { FileParserInterface, ContentResult } from './file-parser.interface.js';
+import { FileParserInterface } from './file-parser.interface.js';
 
 
 export default class JsonParser<T> implements FileParserInterface<T> {
-  private data: ContentResult<T> = null;
+  private data: Nullable<T> = null;
 
   constructor(public readonly content: string) { }
 
-  public getData(): ContentResult<T> {
+  public getData(): Nullable<T> {
     return this.data;
   }
 

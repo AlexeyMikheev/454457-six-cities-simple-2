@@ -1,19 +1,11 @@
 import { CityType } from '../../types/city-type.enum.js';
+import { Nullable } from '../../types/nullable-type.js';
+import { MapperInterface } from './mapper.interface.js';
 
-export default class CityTypeMapper {
-  public static mapToCity(data: string): CityType | null {
-    if(!data){
-      return null;
-    }
+export default class CityTypeMapper implements MapperInterface<CityType> {
+  public mapToItem(data: string): Nullable<CityType> {
+    const cityTypeKey = Object.keys(CityType).find((key) => key.toLowerCase() === data.toLowerCase());
 
-    switch(data.toLowerCase()) {
-      case CityType.Paris.toLowerCase(): return CityType.Paris;
-      case CityType.Cologne.toLowerCase(): return CityType.Cologne;
-      case CityType.Brussels.toLowerCase(): return CityType.Brussels;
-      case CityType.Amsterdam.toLowerCase(): return CityType.Amsterdam;
-      case CityType.Hamburg.toLowerCase(): return CityType.Hamburg;
-      case CityType.Dusseldorf.toLowerCase(): return CityType.Dusseldorf;
-      default: return null;
-    }
+    return cityTypeKey ? CityType[cityTypeKey as CityType] : null;
   }
 }

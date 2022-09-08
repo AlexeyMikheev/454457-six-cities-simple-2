@@ -1,7 +1,7 @@
-export type FileResult = string | null;
+import { Nullable } from '../../types/nullable-type.js';
 
-export interface FileReaderInterface {
+export interface FileReaderInterface<T> {
     readonly path: string;
-    getData(): FileResult;
+    getData(): Nullable<T>;
     readFile(): void;
 }
