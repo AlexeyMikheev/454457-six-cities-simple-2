@@ -1,7 +1,7 @@
 import { CliCommandInterface } from './cli-command.interface.js';
-import TextColor from '../utils/text-color.js';
-import FileReader from '../utils/file-reader.js';
-import JsonParse from '../utils/json-parser.js';
+import TextColor from '../common/text-color.js';
+import FileReader from '../common/file-reader/file-reader.js';
+import JsonParser from '../common/file-parser/json-parser.js';
 import { CommandType } from '../types/command-type.enum.js';
 
 const EMPTY_VERSION = 'Не определена';
@@ -11,10 +11,14 @@ export default class VersionCommand implements CliCommandInterface {
 
   private readVersion(): string {
     let version: string = EMPTY_VERSION;
-    const file = FileReader.readeFileSync('./package.json');
+    const fileReader = new FileReader('./package.json');
+    fileReader.readFile();
+    const file = fileReader.getData();
 
     if(file) {
-      const json = JsonParse.parseJson<{ version:string }>(file);
+      const jsonParser = new JsonParser<{ version:string }>(file);
+      jsonParser.parse();
+      const json = jsonParser.getData();
 
       version = json?.version || EMPTY_VERSION;
     }
@@ -23,10 +27,6 @@ export default class VersionCommand implements CliCommandInterface {
   }
 
   execute() {
-    try{
-      console.log(TextColor.Green(`Версия: ${this.readVersion()}`));
-    } catch(error) {
-      console.log(TextColor.Red(error));
-    }
+    TextColor.Green(`Версия: ${this.readVersion()}`);
   }
 }

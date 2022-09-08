@@ -1,5 +1,5 @@
 import { CliCommandInterface } from './cli-command.interface.js';
-import TextColor from '../utils/text-color.js';
+import TextColor from '../common/text-color.js';
 import { CommandType } from '../types/command-type.enum.js';
 
 const HELP_TEXT = (
