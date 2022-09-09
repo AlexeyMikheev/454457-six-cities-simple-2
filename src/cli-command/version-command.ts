@@ -1,5 +1,5 @@
 import { CliCommandInterface } from './cli-command.interface.js';
-import TextColor from '../common/text-color.js';
+import TextFormatter from '../common/text-formatter.js';
 import FileReader from '../common/file-reader/file-reader.js';
 import JsonParser from '../common/file-parser/json-parser.js';
 import { CommandType } from '../types/command-type.enum.js';
@@ -27,6 +27,6 @@ export default class VersionCommand implements CliCommandInterface {
   }
 
   execute() {
-    TextColor.Green(`Версия: ${this.readVersion()}`);
+    TextFormatter.drawGreen(`Версия: ${this.readVersion()}`);
   }
 }

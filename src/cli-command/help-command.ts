@@ -1,5 +1,5 @@
 import { CliCommandInterface } from './cli-command.interface.js';
-import TextColor from '../common/text-color.js';
+import TextFormatter from '../common/text-formatter.js';
 import { CommandType } from '../types/command-type.enum.js';
 
 const HELP_TEXT = (
@@ -17,6 +17,6 @@ export default class HelpCommand implements CliCommandInterface {
   public readonly name: CommandType = CommandType.Help;
 
   execute() {
-    console.log(TextColor.Blue(HELP_TEXT));
+    console.log(TextFormatter.drawBlue(HELP_TEXT));
   }
 }

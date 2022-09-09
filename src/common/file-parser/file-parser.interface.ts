@@ -6,6 +6,7 @@ export interface FileParserInterface<T> {
     getData(): Nullable<T>;
     parse(mapper?: MapperInterface<T>): void;
 }
+
 export interface FileParserArrayInterface<T> {
     readonly content: string;
     getData(): Nullable<T>[];

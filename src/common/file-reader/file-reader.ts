@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { Nullable } from '../../types/nullable-type.js';
-import TextColor from '../text-color.js';
+import TextFormatter from '../text-formatter.js';
 import { FileReaderInterface } from './file-reader.interface.js';
 
 
@@ -17,7 +17,7 @@ export default class FileReader implements FileReaderInterface<string> {
     try {
       this.data = readFileSync(this.path, 'utf-8');
     } catch (error) {
-      console.log(TextColor.Red(error));
+      console.log(TextFormatter.drawRed(error));
     }
   }
 }

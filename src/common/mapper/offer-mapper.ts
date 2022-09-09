@@ -1,4 +1,4 @@
-import TextFormatter from '../../utils/text-formatter.js';
+import TextFormatter from '../text-formatter.js';
 import { Offer } from '../../types/offer.type.js';
 import { MapperInterface } from './mapper.interface.js';
 import { OfferType } from '../../types/offer-type.enum.js';
