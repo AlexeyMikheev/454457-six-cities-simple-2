@@ -1,20 +1,20 @@
 import { Nullable } from '../../types/nullable-type.js';
 import { MapperInterface } from '../mapper/mapper.interface.js';
 
-export interface ParserStringToSingleInterface<T> {
+export interface ParserJsonInterface<T> {
     readonly content: string;
     getData(): Nullable<T>;
     parse(mapper?: MapperInterface<T>): void;
 }
 
-export interface ParserStringToArrayInterface<T> {
+export interface ParserTSVInterface<T> {
     readonly content: string;
     getData(): Nullable<T>[];
     parse(mapper?: MapperInterface<T>): void;
 }
 
-export interface ParserArrayToSingleInterface<T,C> {
+export interface ParserCommandInterface<T,M> {
     readonly content: string[];
     getData(): T;
-    parse(mapper?: MapperInterface<C>): void;
+    parse(mapper?: MapperInterface<M>): void;
 }

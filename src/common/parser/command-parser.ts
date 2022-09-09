@@ -1,10 +1,10 @@
 import { CommandType } from '../../types/command-type.enum.js';
 import { Command } from '../../types/command-type.js';
 import { MapperInterface } from '../mapper/mapper.interface.js';
-import { ParserArrayToSingleInterface } from './parser.interface';
+import { ParserCommandInterface } from './parser.interface';
 
 
-export default class CommandParser implements ParserArrayToSingleInterface<Command, CommandType> {
+export default class CommandParser implements ParserCommandInterface<Command, CommandType> {
   private data: Command = [CommandType.Help, []];
   constructor(public readonly content: string[]) { }
 

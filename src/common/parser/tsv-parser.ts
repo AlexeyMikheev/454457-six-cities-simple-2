@@ -1,9 +1,9 @@
 import { MapperInterface } from '../mapper/mapper.interface.js';
-import { ParserStringToArrayInterface } from './parser.interface.js';
+import { ParserTSVInterface } from './parser.interface.js';
 import TextFormatter from '../text-formatter.js';
 import { Nullable } from '../../types/nullable-type.js';
 
-export default class TSVParserM<T> implements ParserStringToArrayInterface<T> {
+export default class TSVParserM<T> implements ParserTSVInterface<T> {
   private data: Nullable<T>[] = [];
 
   constructor(public readonly content: string) { }
