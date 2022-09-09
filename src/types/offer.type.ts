@@ -15,4 +15,8 @@ export type Offer = {
     room: number;
     guest: number;
     price: number;
+    features: string[];
+    author: string;
+    commentCount: number;
+    position: [number, number];
 }

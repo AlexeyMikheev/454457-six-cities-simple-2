@@ -27,7 +27,7 @@ export default class TextFormatter {
     return this.draw(TextColorCode.Blue, text);
   }
 
-  public static stringToArray(data: string, separator = '\n'): string[] {
+  public static stringToArray(data: string, separator: string): string[] {
     if (!data?.length) {
       return [];
     }

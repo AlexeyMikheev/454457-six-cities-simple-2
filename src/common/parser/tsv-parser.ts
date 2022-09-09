@@ -14,7 +14,7 @@ export default class TSVParserM<T> implements ParserTSVInterface<T> {
 
   public parse(mapper: MapperInterface<T>) {
     try {
-      const rows = TextFormatter.stringToArray(this.content).filter((row) => row.trim() !== '');
+      const rows = TextFormatter.stringToArray(this.content, '\r\n').filter((row) => row.trim() !== '');
 
       if(rows?.length){
         this.data = rows.map((row) => mapper.mapToItem(row));

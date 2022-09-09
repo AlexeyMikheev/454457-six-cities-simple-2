@@ -7,6 +7,7 @@ import { CommandType } from '../types/command-type.enum.js';
 import { Nullable } from '../types/nullable-type.js';
 import { Offer } from '../types/offer.type.js';
 import { CliCommandInterface } from './cli-command.interface.js';
+import PositionMapper from '../common/mapper/position-mapper.js';
 
 export default class ImportCommand implements CliCommandInterface {
   public readonly name: CommandType = CommandType.Import;
@@ -20,7 +21,7 @@ export default class ImportCommand implements CliCommandInterface {
 
     if (file) {
       const parser = new TSVParserM<Offer>(file);
-      parser.parse(new OfferMapper(new CityTypeMapper(), new OfferTypeMapper()));
+      parser.parse(new OfferMapper(new CityTypeMapper, new OfferTypeMapper, new PositionMapper));
 
       data = parser.getData();
     }
