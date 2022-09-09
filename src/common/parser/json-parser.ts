@@ -1,8 +1,8 @@
 import { Nullable } from '../../types/nullable-type.js';
 import TextFormatter from '../text-formatter.js';
-import { FileParserInterface } from './file-parser.interface.js';
+import { ParserStringToSingleInterface } from './parser.interface.js';
 
-export default class JsonParser<T> implements FileParserInterface<T> {
+export default class JsonParser<T> implements ParserStringToSingleInterface<T> {
   private data: Nullable<T> = null;
 
   constructor(public readonly content: string) { }

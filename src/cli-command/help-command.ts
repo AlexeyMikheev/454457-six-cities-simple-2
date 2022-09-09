@@ -5,12 +5,12 @@ import { CommandType } from '../types/command-type.enum.js';
 const HELP_TEXT = (
   `Программа для подготовки данных для REST API сервера.
     Пример:
-        main.js --<command> [--arguments]
+        main.js --<command> [arguments]
     Команды:
         --version:                   # выводит номер версии
-        --${CommandType.Help}:                      # печатает этот текст
-        --${CommandType.Import} <path>:             # импортирует данные из TSV
-        --${CommandType.Import} <n> <path> <url> # генерирует произвольное количество тестовых данных
+        --${CommandType.Help.toLocaleLowerCase()}:                      # печатает этот текст
+        --${CommandType.Import.toLocaleLowerCase()} <path>:             # импортирует данные из TSV
+        --${CommandType.Generator.toLocaleLowerCase()} <n> <path> <url> # генерирует произвольное количество тестовых данных
     `);
 
 export default class HelpCommand implements CliCommandInterface {

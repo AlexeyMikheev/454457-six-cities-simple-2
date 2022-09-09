@@ -1,6 +1,6 @@
 export enum CommandType {
-    Version = 'version',
-    Help = 'help',
-    Import = 'import',
-    Generator = 'generator',
+    Version = 'Version',
+    Help = 'Help',
+    Import = 'Import',
+    Generator = 'Generator',
 }
