@@ -4,8 +4,12 @@ import { MapperInterface } from './mapper.interface.js';
 
 export default class OfferTypeMapper implements MapperInterface<OfferType> {
   public mapToItem(data: string): Nullable<OfferType> {
-    const cityTypeKey = Object.keys(OfferType).find((key) => key.toLowerCase() === data.toLowerCase());
-
-    return cityTypeKey ? OfferType[cityTypeKey as OfferType] : null;
+    switch(data.toLowerCase()){
+      case OfferType.Apartment: return OfferType.Apartment;
+      case OfferType.House: return OfferType.House;
+      case OfferType.Room: return OfferType.Room;
+      case OfferType.Hotel: return OfferType.Hotel;
+      default: return null;
+    }
   }
 }

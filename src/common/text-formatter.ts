@@ -1,14 +1,13 @@
 import chalk from 'chalk';
-
 export enum TextColorCode {
-    Red,
-    Green,
-    Blue
+  Red,
+  Green,
+  Blue
 }
 
 export default class TextFormatter {
-  public static draw(code:TextColorCode, text: unknown[]):string | unknown[] {
-    switch(code) {
+  public static draw(code: TextColorCode, text: unknown[]): string | unknown[] {
+    switch (code) {
       case TextColorCode.Green: return chalk.green(text);
       case TextColorCode.Red: return chalk.red(text);
       case TextColorCode.Blue: return chalk.blue(text);
@@ -16,15 +15,15 @@ export default class TextFormatter {
     }
   }
 
-  public static drawRed(...text: unknown[]):string | unknown[]  {
+  public static drawRed(...text: unknown[]): string | unknown[] {
     return this.draw(TextColorCode.Red, text);
   }
 
-  public static drawGreen(...text: unknown[]):string | unknown[]  {
+  public static drawGreen(...text: unknown[]): string | unknown[] {
     return this.draw(TextColorCode.Green, text);
   }
 
-  public static drawBlue(...text: unknown[]):string | unknown[]  {
+  public static drawBlue(...text: unknown[]): string | unknown[] {
     return this.draw(TextColorCode.Blue, text);
   }
 
