@@ -11,12 +11,13 @@ export default class VersionCommand implements CliCommandInterface {
 
   private readVersion(): string {
     let version: string = EMPTY_VERSION;
+
     const fileReader = new FileReader('./package.json');
     fileReader.readFile();
     const file = fileReader.getData();
 
-    if(file) {
-      const jsonParser = new JsonParser<{ version:string }>(file);
+    if (file) {
+      const jsonParser = new JsonParser<{ version: string }>(file);
       jsonParser.parse();
       const json = jsonParser.getData();
 

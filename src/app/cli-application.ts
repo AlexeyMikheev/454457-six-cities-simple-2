@@ -10,7 +10,7 @@ export default class CliApplication {
       return;
     }
 
-    this.commands = commands.reduce((acc, command) => {
+    commands.reduce((acc, command) => {
       const { name } = command;
 
       if (!acc.has(name)) {
@@ -18,7 +18,6 @@ export default class CliApplication {
       }
       return acc;
     }, this.commands);
-    console.log(this.commands);
   }
 
   public processCommand(command: Command) {

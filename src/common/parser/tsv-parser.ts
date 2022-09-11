@@ -1,14 +1,12 @@
 import { MapperInterface } from '../mapper/mapper.interface.js';
-import { ParserTSVInterface } from './parser.interface.js';
 import TextFormatter from '../text-formatter.js';
-import { Nullable } from '../../types/nullable-type.js';
 
-export default class TSVParserM<T> implements ParserTSVInterface<T> {
-  private data: Nullable<T>[] = [];
+export default class TSVParserM<T>  {
+  private data?: T[];
 
   constructor(public readonly content: string) { }
 
-  public getData(): Nullable<T>[] {
+  public getData() {
     return this.data;
   }
 
@@ -16,8 +14,16 @@ export default class TSVParserM<T> implements ParserTSVInterface<T> {
     try {
       const rows = TextFormatter.stringToArray(this.content, '\r\n').filter((row) => row.trim() !== '');
 
-      if(rows?.length){
-        this.data = rows.map((row) => mapper.mapToItem(row));
+      if (rows?.length) {
+        this.data = rows.reduce((acc, row) => {
+          const rowData = mapper.mapToItem(row);
+
+          if (rowData) {
+            acc.push(rowData);
+          }
+
+          return acc;
+        }, [] as T[]);
       }
     } catch (error) {
       console.log(TextFormatter.drawRed(error));

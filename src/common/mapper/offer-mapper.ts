@@ -4,14 +4,17 @@ import { MapperInterface } from './mapper.interface.js';
 import { OfferType } from '../../types/offer-type.enum.js';
 import { CityType } from '../../types/city-type.enum.js';
 import { Position } from '../../types/position-type.js';
+import { Author } from '../../types/author-type.js';
 
 export default class OfferMapper implements MapperInterface<Offer> {
   constructor(
     private cityMapper: MapperInterface<CityType>,
     private offerTypeMapper: MapperInterface<OfferType>,
-    private positionMapper: MapperInterface<Position>) { }
+    private positionMapper: MapperInterface<Position>,
+    private authorMapper: MapperInterface<Author>,
+  ) { }
 
-  public mapToItem(value: string): Offer {
+  public mapToItem(value: string) {
     const values: string[] = TextFormatter.stringToArray(value, '\t');
 
     const [
@@ -47,7 +50,7 @@ export default class OfferMapper implements MapperInterface<Offer> {
       guest: Number.parseInt(guest, 10),
       price: Number.parseInt(price, 10),
       features: TextFormatter.stringToArray(features, ';'),
-      author,
+      author: this.authorMapper.mapToItem(author),
       commentCount: Number.parseInt(commentCount, 10),
       position: this.positionMapper.mapToItem(position) || [0, 0]
     };

@@ -1,13 +1,11 @@
-import { Nullable } from '../../types/nullable-type.js';
 import TextFormatter from '../text-formatter.js';
-import { ParserJsonInterface } from './parser.interface.js';
 
-export default class JsonParser<T> implements ParserJsonInterface<T> {
-  private data: Nullable<T> = null;
+export default class JsonParser<T>  {
+  private data?: T;
 
   constructor(public readonly content: string) { }
 
-  public getData(): Nullable<T> {
+  public getData() {
     return this.data;
   }
 

@@ -1,15 +1,13 @@
 import { readFileSync } from 'fs';
-import { Nullable } from '../../types/nullable-type.js';
 import TextFormatter from '../text-formatter.js';
 import { FileReaderInterface } from './file-reader.interface.js';
 
-
 export default class FileReader implements FileReaderInterface<string> {
-  private data: Nullable<string> = null;
+  private data?: string;
 
   constructor(public readonly path: string) { }
 
-  public getData(): Nullable<string> {
+  public getData() {
     return this.data;
   }
 
