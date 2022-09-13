@@ -1,4 +1,4 @@
-import TextFormatter from '../text-formatter.js';
+import { stringToArray } from '../utils/text-formatter.js';
 import { Offer } from '../../types/offer.type.js';
 import { MapperInterface } from './mapper.interface.js';
 import { OfferType } from '../../types/offer-type.enum.js';
@@ -15,7 +15,7 @@ export default class OfferMapper implements MapperInterface<Offer> {
   ) { }
 
   public mapToItem(value: string) {
-    const values: string[] = TextFormatter.stringToArray(value, '\t');
+    const values: string[] = stringToArray(value, '\t');
 
     const [
       name,
@@ -42,14 +42,14 @@ export default class OfferMapper implements MapperInterface<Offer> {
       date: new Date(date),
       city: this.cityMapper.mapToItem(city),
       preview,
-      images: TextFormatter.stringToArray(images, ';'),
+      images: stringToArray(images, ';'),
       isPremium: !!isPremium,
       rating: Number.parseInt(rating, 10),
       type: this.offerTypeMapper.mapToItem(type),
       room: Number.parseInt(room, 10),
       guest: Number.parseInt(guest, 10),
       price: Number.parseInt(price, 10),
-      features: TextFormatter.stringToArray(features, ';'),
+      features: stringToArray(features, ';'),
       author: this.authorMapper.mapToItem(author),
       commentCount: Number.parseInt(commentCount, 10),
       position: this.positionMapper.mapToItem(position) || [0, 0]

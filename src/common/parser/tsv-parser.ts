@@ -1,5 +1,5 @@
 import { MapperInterface } from '../mapper/mapper.interface.js';
-import TextFormatter from '../text-formatter.js';
+import { stringToArray, drawRed } from '../utils/text-formatter.js';
 
 export default class TSVParserM<T>  {
   private data?: T[];
@@ -12,7 +12,7 @@ export default class TSVParserM<T>  {
 
   public parse(mapper: MapperInterface<T>) {
     try {
-      const rows = TextFormatter.stringToArray(this.content, '\r\n').filter((row) => row.trim() !== '');
+      const rows = stringToArray(this.content, '\r\n').filter((row) => row.trim() !== '');
 
       if (rows?.length) {
         this.data = rows.reduce((acc, row) => {
@@ -26,7 +26,7 @@ export default class TSVParserM<T>  {
         }, [] as T[]);
       }
     } catch (error) {
-      console.log(TextFormatter.drawRed(error));
+      console.log(drawRed(error));
     }
   }
 }
