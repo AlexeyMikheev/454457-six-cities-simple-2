@@ -1,7 +1,7 @@
 import { OfferType } from '../../types/offer-type.enum.js';
 import { MapperInterface } from './mapper.interface.js';
 
-export default class OfferTypeMapper implements MapperInterface<OfferType> {
+class OfferTypeMapper implements MapperInterface<OfferType> {
   public mapToItem(data: string) {
     switch (data.toLowerCase()) {
       case OfferType.Apartment: return OfferType.Apartment;
@@ -12,3 +12,5 @@ export default class OfferTypeMapper implements MapperInterface<OfferType> {
     }
   }
 }
+
+export default OfferTypeMapper;

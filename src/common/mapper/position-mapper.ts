@@ -1,10 +1,9 @@
 import { Position } from '../../types/position-type.js';
-import { stringToArray } from '../utils/text-formatter.js';
 import { MapperInterface } from './mapper.interface.js';
 
-export default class PositionMapper implements MapperInterface<Position> {
+class PositionMapper implements MapperInterface<Position> {
   public mapToItem(data: string) {
-    const values = stringToArray(data, ';');
+    const values = data.split(';');
 
     if (values?.length !== 2) {
       throw new Error(`В значение ${data} не удалось определить Position`);
@@ -28,3 +27,5 @@ export default class PositionMapper implements MapperInterface<Position> {
     return position;
   }
 }
+
+export default PositionMapper;

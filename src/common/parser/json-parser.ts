@@ -1,6 +1,6 @@
-import { drawRed } from '../utils/text-formatter.js';
+import { drawRed } from '../../utils/text.js';
 
-export default class JsonParser<T>  {
+class JsonParser<T>  {
   private data?: T;
 
   constructor(public readonly content: string) { }
@@ -17,3 +17,5 @@ export default class JsonParser<T>  {
     }
   }
 }
+
+export default JsonParser;

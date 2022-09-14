@@ -1,0 +1,12 @@
+{
+    "api": {
+        "cities": [
+            "Paris",
+            "Cologne",
+            "Brussels",
+            "Amsterdam",
+            "Hamburg",
+            "Dusseldorf"
+        ]
+    }
+}

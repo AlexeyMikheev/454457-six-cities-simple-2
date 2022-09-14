@@ -1,5 +1,5 @@
 import { CliCommandInterface } from './cli-command.interface.js';
-import { drawBlue } from '../common/utils/text-formatter.js';
+import { drawBlue } from '../utils/text.js';
 import { CommandType } from '../types/command-type.enum.js';
 
 const HELP_TEXT = (
@@ -10,13 +10,15 @@ const HELP_TEXT = (
         --version:                   # выводит номер версии
         --${CommandType.Help.toLocaleLowerCase()}:                      # печатает этот текст
         --${CommandType.Import.toLocaleLowerCase()} <path>:             # импортирует данные из TSV
-        --${CommandType.Generator.toLocaleLowerCase()} <n> <path> <url> # генерирует произвольное количество тестовых данных
+        --${CommandType.Generate.toLocaleLowerCase()} <n> <path> <url> # генерирует произвольное количество тестовых данных
     `);
 
-export default class HelpCommand implements CliCommandInterface {
+class HelpCommand implements CliCommandInterface {
   public readonly name: CommandType = CommandType.Help;
 
   execute() {
     console.log(drawBlue(HELP_TEXT));
   }
 }
+
+export default HelpCommand;

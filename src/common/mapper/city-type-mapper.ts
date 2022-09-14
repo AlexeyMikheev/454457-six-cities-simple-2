@@ -1,7 +1,7 @@
 import { CityType } from '../../types/city-type.enum.js';
 import { MapperInterface } from './mapper.interface.js';
 
-export default class CityTypeMapper implements MapperInterface<CityType> {
+class CityTypeMapper implements MapperInterface<CityType> {
   public mapToItem(data: string) {
     switch (data) {
       case CityType.Paris: return CityType.Paris;
@@ -14,3 +14,5 @@ export default class CityTypeMapper implements MapperInterface<CityType> {
     }
   }
 }
+
+export default CityTypeMapper;

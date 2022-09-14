@@ -2,7 +2,7 @@ import { CliCommandInterface } from '../cli-command/cli-command.interface.js';
 import { CommandType } from '../types/command-type.enum.js';
 import { Command } from '../types/command-type.js';
 
-export default class CliApplication {
+class CliApplication {
   private commands: Map<CommandType, CliCommandInterface> = new Map();
 
   public registerCommands(commands: CliCommandInterface[]) {
@@ -29,3 +29,5 @@ export default class CliApplication {
     }
   }
 }
+
+export default CliApplication;
