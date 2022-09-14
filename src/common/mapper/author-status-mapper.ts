@@ -6,8 +6,15 @@ class AuthorStatusMapper implements MapperInterface<AuthorStatus> {
     switch (data.toLowerCase()) {
       case AuthorStatus.Standart: return AuthorStatus.Standart;
       case AuthorStatus.Pro: return AuthorStatus.Pro;
-      default: return AuthorStatus.Standart;
+      default: throw new Error(`Значение ${data} не определено в AuthorStatus`);
     }
+  }
+
+  public mapToString(data: AuthorStatus): string {
+    if (!data) {
+      throw new Error(`Значение ${data} не определено`);
+    }
+    return data.toString();
   }
 }
 

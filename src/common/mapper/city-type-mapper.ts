@@ -13,6 +13,13 @@ class CityTypeMapper implements MapperInterface<CityType> {
       default: throw new Error(`Значение ${data} не определено в CityType`);
     }
   }
+
+  public mapToString(data: CityType): string {
+    if (!data) {
+      throw new Error(`Значение ${data} не определено`);
+    }
+    return data.toString();
+  }
 }
 
 export default CityTypeMapper;

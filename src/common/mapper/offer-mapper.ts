@@ -11,10 +11,11 @@ class OfferMapper implements MapperInterface<Offer> {
     private offerTypeMapper: MapperInterface<OfferType>,
     private positionMapper: MapperInterface<Position>,
     private authorMapper: MapperInterface<Author>,
+    private readonly separator = '\t'
   ) { }
 
   public mapToItem(value: string) {
-    const values: string[] = value.split('\t');
+    const values: string[] = value.split(this.separator);
 
     const [
       title,
@@ -53,6 +54,46 @@ class OfferMapper implements MapperInterface<Offer> {
       commentCount: Number.parseInt(commentCount, 10),
       position: this.positionMapper.mapToItem(position) || [0, 0]
     };
+  }
+
+  public mapToString(data: Offer): string {
+    const {
+      title,
+      description,
+      date,
+      city,
+      preview,
+      images,
+      isPremium,
+      rating,
+      type,
+      room,
+      guest,
+      price,
+      features,
+      author,
+      commentCount,
+      position,
+    } = data;
+
+    return [
+      title,
+      description,
+      date.toISOString(),
+      this.cityMapper.mapToString(city),
+      preview,
+      images.join(';'),
+      isPremium,
+      rating,
+      this.offerTypeMapper.mapToString(type),
+      room,
+      guest,
+      price,
+      features.join(';'),
+      this.authorMapper.mapToString(author),
+      commentCount,
+      this.positionMapper.mapToString(position),
+    ].join(this.separator);
   }
 }
 

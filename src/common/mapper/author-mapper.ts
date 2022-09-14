@@ -4,9 +4,10 @@ import { MapperInterface } from './mapper.interface.js';
 
 class AuthorMapper implements MapperInterface<Author> {
   private statusMapper = new AuthorStatusMapper();
+  constructor(private readonly separator = ';') { }
 
   public mapToItem(data: string) {
-    const values = data?.split(';');
+    const values = data?.split(this.separator);
 
     const [
       name,
@@ -23,6 +24,24 @@ class AuthorMapper implements MapperInterface<Author> {
       password,
       status: this.statusMapper.mapToItem(status)
     };
+  }
+
+  public mapToString(data: Author): string {
+    const {
+      name,
+      email,
+      avatar,
+      password,
+      status,
+    } = data;
+
+    return [
+      name,
+      email,
+      avatar,
+      password,
+      this.statusMapper.mapToString(status),
+    ].join(this.separator);
   }
 }
 

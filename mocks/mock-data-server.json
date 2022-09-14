@@ -7,7 +7,7 @@
             "Мангал",
             "Беседка"
         ],
-        "descriptions":[
+        "descriptions": [
             "Под открытым небом",
             "Песчаный пляж",
             "Вид на горы",
@@ -21,19 +21,70 @@
             "Hamburg",
             "Dusseldorf"
         ],
-        "previews":[
+        "previews": [
             "preview-1.jpg",
             "preview-2.jpg",
             "preview-3.jpg",
             "preview-4.jpg",
             "preview-5.jpg"
         ],
-        "images":[
+        "images": [
             "image-1.jpg",
             "image-2.jpg",
             "image-3.jpg",
             "image-4.jpg",
             "image-5.jpg"
+        ],
+        "types": [
+            "apartment",
+            "house",
+            "room",
+            "hotel"
+        ],
+        "features": [
+            "Breakfast",
+            "Air conditioning",
+            "Laptop friendly workspace",
+            "Baby seat",
+            "Washer",
+            "Towels",
+            "Fridge"
+        ],
+        "authors": [
+            {
+                "name": "Иван",
+                "email": "ivan@email",
+                "avatar": "avatar-ivan.jpg",
+                "password": "password",
+                "status": "обычный"
+            },
+            {
+                "name": "Пётр",
+                "email": "peter@email",
+                "avatar": "avatar-peter.jpg",
+                "password": "password",
+                "status": "pro"
+            },
+            {
+                "name": "Авдей",
+                "email": "avdei@email",
+                "avatar": "avatar-avdei.jpg",
+                "password": "password",
+                "status": "обычный"
+            },
+            {
+                "name": "Григорий",
+                "email": "grigory@email",
+                "avatar": "avatar-grigory.jpg",
+                "password": "password",
+                "status": "обычный"
+            }
+        ],
+        "positions": [
+            [48.85661, 2.351499],
+            [58.85661, 12.351499],
+            [68.85661, 22.351499],
+            [78.85661, 32.351499]
         ]
     }
 }

@@ -11,6 +11,13 @@ class OfferTypeMapper implements MapperInterface<OfferType> {
       default: throw new Error(`Значение ${data} не определено в OfferType`);
     }
   }
+
+  public mapToString(data: OfferType): string {
+    if (!data) {
+      throw new Error(`Значение ${data} не определено`);
+    }
+    return data.toString();
+  }
 }
 
 export default OfferTypeMapper;

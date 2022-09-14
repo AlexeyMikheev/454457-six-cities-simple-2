@@ -3,7 +3,13 @@ import { MockData } from '../types/mock-data.type.js';
 import { CliCommandInterface } from './cli-command.interface.js';
 import { get } from '../utils/api.js';
 import OfferGenerator from '../common/offer-generator/offer-generator.js';
-import { appendFile } from 'fs/promises';
+import { existsSync } from 'fs';
+import { appendFile, truncate } from 'fs/promises';
+import OfferMapper from '../common/mapper/offer-mapper.js';
+import CityTypeMapper from '../common/mapper/city-type-mapper.js';
+import OfferTypeMapper from '../common/mapper/offer-type-mapper.js';
+import PositionMapper from '../common/mapper/position-mapper.js';
+import AuthorMapper from '../common/mapper/author-mapper.js';
 
 class GenerateCommand implements CliCommandInterface {
   public readonly name = CommandType.Generate;
@@ -17,9 +23,19 @@ class GenerateCommand implements CliCommandInterface {
 
     if (this.initialData) {
       const offerGenerator = new OfferGenerator(this.initialData);
+      const offerMapper = new OfferMapper(
+        new CityTypeMapper,
+        new OfferTypeMapper,
+        new PositionMapper,
+        new AuthorMapper
+      );
+
+      if (existsSync(filePath)) {
+        await truncate(filePath);
+      }
 
       for (let i = 0; i < offerCount; i++) {
-        await appendFile(filePath, `${offerGenerator.generate()}\n`);
+        await appendFile(filePath, `${offerGenerator.generate(offerMapper)}\n`);
       }
     }
   }

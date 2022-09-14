@@ -11,6 +11,13 @@ class CommandTypeMapper implements MapperInterface<CommandType> {
       default: throw new Error(`Значение ${data} не определено в CommandType`);
     }
   }
+
+  public mapToString(data: CommandType): string {
+    if (!data) {
+      throw new Error(`Значение ${data} не определено`);
+    }
+    return data.toString();
+  }
 }
 
 export default CommandTypeMapper;

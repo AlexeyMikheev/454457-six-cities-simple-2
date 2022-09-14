@@ -1,4 +1,7 @@
-export const getRandomValue = (min: number, max: number, precision = 0): number => +(min + (Math.random() * (max - min)).toFixed(precision));
+export const getRandomValue = (min: number, max: number, precision = 0): number => {
+  const randomValue = min + (Math.random() * (max - min));
+  return +randomValue.toFixed(precision);
+};
 
 export const getRandomItems = <T>(items: T[]): T[] => {
   const max = items.length - 1;
