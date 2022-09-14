@@ -3,7 +3,7 @@ import { MapperInterface } from './mapper.interface.js';
 
 class PositionMapper implements MapperInterface<Position> {
   public mapToItem(data: string) {
-    const values = data.split(';');
+    const values = data?.split(';');
 
     if (values?.length !== 2) {
       throw new Error(`В значение ${data} не удалось определить Position`);

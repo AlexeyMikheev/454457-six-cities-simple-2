@@ -6,7 +6,7 @@ class AuthorMapper implements MapperInterface<Author> {
   private statusMapper = new AuthorStatusMapper();
 
   public mapToItem(data: string) {
-    const values = data.split(';');
+    const values = data?.split(';');
 
     const [
       name,

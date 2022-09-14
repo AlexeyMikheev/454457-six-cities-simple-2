@@ -17,7 +17,7 @@ class OfferMapper implements MapperInterface<Offer> {
     const values: string[] = value.split('\t');
 
     const [
-      name,
+      title,
       description,
       date,
       city,
@@ -36,19 +36,19 @@ class OfferMapper implements MapperInterface<Offer> {
     ] = values;
 
     return {
-      name,
+      title,
       description,
       date: new Date(date),
       city: this.cityMapper.mapToItem(city),
       preview,
-      images: images.split(';'),
+      images: images?.split(';'),
       isPremium: !!isPremium,
       rating: Number.parseInt(rating, 10),
       type: this.offerTypeMapper.mapToItem(type),
       room: Number.parseInt(room, 10),
       guest: Number.parseInt(guest, 10),
       price: Number.parseInt(price, 10),
-      features: features.split(';'),
+      features: features?.split(';'),
       author: this.authorMapper.mapToItem(author),
       commentCount: Number.parseInt(commentCount, 10),
       position: this.positionMapper.mapToItem(position) || [0, 0]
