@@ -2,7 +2,7 @@ import { CommandType } from '../../types/command-type.enum.js';
 import { Command } from '../../types/command-type.js';
 import { MapperInterface } from '../mapper/mapper.interface.js';
 
-export default class CommandParser {
+class CommandParser {
   private data: Command = [CommandType.Help, []];
   constructor(public readonly content: string[]) { }
 
@@ -22,3 +22,5 @@ export default class CommandParser {
     this.data = [commandType, commandArgs];
   }
 }
+
+export default CommandParser;

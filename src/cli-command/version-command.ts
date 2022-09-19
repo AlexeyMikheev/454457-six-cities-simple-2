@@ -1,12 +1,12 @@
 import { CliCommandInterface } from './cli-command.interface.js';
-import TextFormatter from '../common/text-formatter.js';
+import { drawGreen } from '../utils/text.js';
 import FileReader from '../common/file-reader/file-reader.js';
 import JsonParser from '../common/parser/json-parser.js';
 import { CommandType } from '../types/command-type.enum.js';
 
 const EMPTY_VERSION = 'Не определена';
 
-export default class VersionCommand implements CliCommandInterface {
+class VersionCommand implements CliCommandInterface {
   public readonly name: CommandType.Version = CommandType.Version;
 
   private readVersion(): string {
@@ -28,6 +28,8 @@ export default class VersionCommand implements CliCommandInterface {
   }
 
   execute() {
-    console.log(TextFormatter.drawGreen(`Версия: ${this.readVersion()}`));
+    console.log(drawGreen(`Версия: ${this.readVersion()}`));
   }
 }
+
+export default VersionCommand;
