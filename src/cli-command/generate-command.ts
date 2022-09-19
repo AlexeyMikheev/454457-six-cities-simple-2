@@ -4,12 +4,13 @@ import { CliCommandInterface } from './cli-command.interface.js';
 import { get } from '../utils/api.js';
 import OfferGenerator from '../common/offer-generator/offer-generator.js';
 import { existsSync } from 'fs';
-import { appendFile, truncate } from 'fs/promises';
+import { truncate } from 'fs/promises';
 import OfferMapper from '../common/mapper/offer-mapper.js';
 import CityTypeMapper from '../common/mapper/city-type-mapper.js';
 import OfferTypeMapper from '../common/mapper/offer-type-mapper.js';
 import PositionMapper from '../common/mapper/position-mapper.js';
 import AuthorMapper from '../common/mapper/author-mapper.js';
+import FileWriter from '../common/file-writer/file-writer.js';
 
 class GenerateCommand implements CliCommandInterface {
   public readonly name = CommandType.Generate;
@@ -34,8 +35,10 @@ class GenerateCommand implements CliCommandInterface {
         await truncate(filePath);
       }
 
+      const fileWriter = new FileWriter(filePath);
+
       for (let i = 0; i < offerCount; i++) {
-        await appendFile(filePath, `${offerGenerator.generate(offerMapper)}\n`);
+        await fileWriter.writeFilePart(`${offerGenerator.generate(offerMapper)}\n`);
       }
     }
   }

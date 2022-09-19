@@ -10,28 +10,10 @@ export enum FileReaderEvents {
 class FileReader extends EventEmitter implements FileReaderInterface<string> {
   private data?: string;
 
-  private readFilePart(part: string, separator = '\n'): string {
-    let index = part.indexOf(separator);
-
-    if (index === -1) {
-      return part;
-    }
-
-    const readyPart = part.slice(0, index);
-
-    if (this.listenerCount(FileReaderEvents.OnLineRead)) {
-      this.emit(FileReaderEvents.OnLineRead, readyPart);
-    }
-
-    part = part.slice(++index);
-
-    return this.readFilePart(part);
-  }
-
   constructor(
     public readonly path: string,
     private readonly encoding: BufferEncoding = 'utf-8',
-    private readonly chunkSize = 1024) {
+    private readonly chunkSize = 512) {
     super();
   }
 
@@ -56,7 +38,19 @@ class FileReader extends EventEmitter implements FileReaderInterface<string> {
     let temp = '';
 
     for await (const part of stream) {
-      temp = this.readFilePart(temp + part.toString(), separator);
+      temp = temp + part.toString();
+
+      let index;
+
+      while ((index = temp.indexOf(separator)) !== -1) {
+        const readyPart = temp.slice(0, index);
+
+        if (this.listenerCount(FileReaderEvents.OnLineRead)) {
+          this.emit(FileReaderEvents.OnLineRead, readyPart);
+        }
+
+        temp = temp.slice(++index);
+      }
     }
   }
 }

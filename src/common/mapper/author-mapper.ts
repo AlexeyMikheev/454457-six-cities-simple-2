@@ -27,20 +27,12 @@ class AuthorMapper implements MapperInterface<Author> {
   }
 
   public mapToString(data: Author): string {
-    const {
-      name,
-      email,
-      avatar,
-      password,
-      status,
-    } = data;
-
     return [
-      name,
-      email,
-      avatar,
-      password,
-      this.statusMapper.mapToString(status),
+      data.name,
+      data.email,
+      data.avatar,
+      data.password,
+      this.statusMapper.mapToString(data.status),
     ].join(this.separator);
   }
 }

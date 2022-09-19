@@ -57,42 +57,23 @@ class OfferMapper implements MapperInterface<Offer> {
   }
 
   public mapToString(data: Offer): string {
-    const {
-      title,
-      description,
-      date,
-      city,
-      preview,
-      images,
-      isPremium,
-      rating,
-      type,
-      room,
-      guest,
-      price,
-      features,
-      author,
-      commentCount,
-      position,
-    } = data;
-
     return [
-      title,
-      description,
-      date.toISOString(),
-      this.cityMapper.mapToString(city),
-      preview,
-      images.join(';'),
-      isPremium,
-      rating,
-      this.offerTypeMapper.mapToString(type),
-      room,
-      guest,
-      price,
-      features.join(';'),
-      this.authorMapper.mapToString(author),
-      commentCount,
-      this.positionMapper.mapToString(position),
+      data.title,
+      data.description,
+      data.date.toISOString(),
+      this.cityMapper.mapToString(data.city),
+      data.preview,
+      data.images.join(';'),
+      data.isPremium,
+      data.rating,
+      this.offerTypeMapper.mapToString(data.type),
+      data.room,
+      data.guest,
+      data.price,
+      data.features.join(';'),
+      this.authorMapper.mapToString(data.author),
+      data.commentCount,
+      this.positionMapper.mapToString(data.position),
     ].join(this.separator);
   }
 }
