@@ -1,8 +1,6 @@
-import Application from './app/applications.js';
-import ConfigService from './common/config-service/config.service.js';
-import LoggerService from './common/logger-service/logger.service.js';
+import Application from './app/application.js';
+import Bootstrap from './common/bootstrap/bootstrap.js';
+import { INJECT_KEYS } from './types/inject-type.enum.js';
 
-const logger = new LoggerService();
-const config = new ConfigService(logger);
-const application = new Application(logger, config);
+const application = Bootstrap.getContainer().get<Application>(INJECT_KEYS.Application);
 await application.init();
