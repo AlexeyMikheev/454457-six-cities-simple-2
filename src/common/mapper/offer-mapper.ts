@@ -4,24 +4,15 @@ import { OfferType } from '../../types/offer-type.enum.js';
 import { CityType } from '../../types/city-type.enum.js';
 import { Position } from '../../types/position-type.js';
 import { Author } from '../../types/author-type.js';
-import CityTypeMapper from './city-type-mapper.js';
-import OfferTypeMapper from './offer-type-mapper.js';
-import PositionMapper from './position-mapper.js';
-import AuthorMapper from './author-mapper.js';
 
 class OfferMapper implements MapperInterface<Offer> {
-  private cityMapper!: MapperInterface<CityType>;
-  private offerTypeMapper!: MapperInterface<OfferType>;
-  private positionMapper!: MapperInterface<Position>;
-  private authorMapper!: MapperInterface<Author>;
-
-  constructor(private readonly separator = '\t') {
-    this.cityMapper = new CityTypeMapper();
-    this.offerTypeMapper = new OfferTypeMapper();
-    this.positionMapper = new PositionMapper();
-    this.authorMapper = new AuthorMapper();
-
-  }
+  constructor(
+    private cityMapper: MapperInterface<CityType>,
+    private offerTypeMapper: MapperInterface<OfferType>,
+    private positionMapper: MapperInterface<Position>,
+    private authorMapper: MapperInterface<Author>,
+    private readonly separator = '\t',
+  ) { }
 
   public mapToItem(value: string) {
     const values: string[] = value.split(this.separator);
