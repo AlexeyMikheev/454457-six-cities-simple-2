@@ -11,7 +11,7 @@ class OfferMapper implements MapperInterface<Offer> {
     private offerTypeMapper: MapperInterface<OfferType>,
     private positionMapper: MapperInterface<Position>,
     private authorMapper: MapperInterface<Author>,
-    private readonly separator = '\t'
+    private readonly separator = '\t',
   ) { }
 
   public mapToItem(value: string) {
