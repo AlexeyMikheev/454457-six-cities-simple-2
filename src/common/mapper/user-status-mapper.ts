@@ -1,16 +1,16 @@
-import { AuthorStatus } from '../../types/author-status.enum.js';
+import { UserStatus } from '../../types/user-status.enum.js';
 import { MapperInterface } from './mapper.interface.js';
 
-class AuthorStatusMapper implements MapperInterface<AuthorStatus> {
+class UserStatusMapper implements MapperInterface<UserStatus> {
   public mapToItem(data: string) {
     switch (data.toLowerCase()) {
-      case AuthorStatus.Standart: return AuthorStatus.Standart;
-      case AuthorStatus.Pro: return AuthorStatus.Pro;
+      case UserStatus.Standart: return UserStatus.Standart;
+      case UserStatus.Pro: return UserStatus.Pro;
       default: throw new Error(`Значение ${data} не определено в AuthorStatus`);
     }
   }
 
-  public mapToString(data: AuthorStatus): string {
+  public mapToString(data: UserStatus): string {
     if (!data) {
       throw new Error(`Значение ${data} не определено`);
     }
@@ -18,4 +18,4 @@ class AuthorStatusMapper implements MapperInterface<AuthorStatus> {
   }
 }
 
-export default AuthorStatusMapper;
+export default UserStatusMapper;

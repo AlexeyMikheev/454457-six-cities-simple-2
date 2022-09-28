@@ -1,4 +1,4 @@
-import { Author } from './author-type.js';
+import { User } from './user-type.js';
 import { Position } from './position-type.js';
 
 export type MockData = {
@@ -9,6 +9,6 @@ export type MockData = {
     images: string[];
     types: string[];
     features: string[];
-    authors: Author[];
+    authors: User[];
     positions: Position[];
 }

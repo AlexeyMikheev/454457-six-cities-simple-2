@@ -1,4 +1,4 @@
-import { Author } from './author-type.js';
+import { User } from './user-type.js';
 import { CityType } from './city-type.enum.js';
 import { OfferType } from './offer-type.enum.js';
 
@@ -16,7 +16,7 @@ export type Offer = {
     guest: number;
     price: number;
     features: string[];
-    author: Author;
+    author: User;
     commentCount: number;
     position: [number, number];
 }

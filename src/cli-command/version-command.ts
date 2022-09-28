@@ -27,7 +27,7 @@ class VersionCommand implements CliCommandInterface {
     return version;
   }
 
-  execute() {
+  async execute() {
     console.log(drawGreen(`Версия: ${this.readVersion()}`));
   }
 }

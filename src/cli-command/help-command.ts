@@ -16,7 +16,7 @@ const HELP_TEXT = (
 class HelpCommand implements CliCommandInterface {
   public readonly name: CommandType = CommandType.Help;
 
-  execute() {
+  async execute() {
     console.log(drawBlue(HELP_TEXT));
   }
 }

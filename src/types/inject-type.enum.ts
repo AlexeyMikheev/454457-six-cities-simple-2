@@ -3,6 +3,8 @@ export enum InjectType {
   LoggerInterface = 'LoggerInterface',
   ConfigInterface = 'ConfigInterface',
   DatabaseInterface = 'DatabaseInterface',
+  UserService = 'UserService',
+  UserModel = 'UserModel',
 }
 
 export type InjectKeys = { [key in InjectType]: symbol };
@@ -12,4 +14,6 @@ export const INJECT_KEYS: InjectKeys = {
   LoggerInterface: Symbol.for(InjectType.LoggerInterface),
   ConfigInterface: Symbol.for(InjectType.ConfigInterface),
   DatabaseInterface: Symbol.for(InjectType.DatabaseInterface),
+  UserService: Symbol.for(InjectType.UserService),
+  UserModel: Symbol.for(InjectType.UserModel),
 };

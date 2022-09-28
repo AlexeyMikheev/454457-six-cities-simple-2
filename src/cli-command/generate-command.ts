@@ -10,7 +10,7 @@ import FileWriter from '../common/file-writer/file-writer.js';
 import CityTypeMapper from '../common/mapper/city-type-mapper.js';
 import OfferTypeMapper from '../common/mapper/offer-type-mapper.js';
 import PositionMapper from '../common/mapper/position-mapper.js';
-import AuthorMapper from '../common/mapper/author-mapper.js';
+import UserMapper from '../common/mapper/user-mapper.js';
 
 class GenerateCommand implements CliCommandInterface {
   public readonly name = CommandType.Generate;
@@ -28,7 +28,7 @@ class GenerateCommand implements CliCommandInterface {
         new CityTypeMapper(),
         new OfferTypeMapper(),
         new PositionMapper(),
-        new AuthorMapper()
+        new UserMapper()
       );
 
       if (existsSync(filePath)) {

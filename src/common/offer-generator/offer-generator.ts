@@ -1,4 +1,4 @@
-import { Author } from '../../types/author-type.js';
+import { User } from '../../types/user-type.js';
 import { CityType } from '../../types/city-type.enum.js';
 import { GuestLimit } from '../../types/guest-limit.enum.js';
 import { MockData } from '../../types/mock-data.type.js';
@@ -30,7 +30,7 @@ class OfferGenerator implements OfferGeneratorInterface {
       guest: getRandomValue(GuestLimit.Min, GuestLimit.Max),
       price: getRandomValue(PriceLimit.Min, PriceLimit.Max),
       features: getRandomItems<string>(this.mockData.features),
-      author: getRandomItem<Author>(this.mockData.authors),
+      author: getRandomItem<User>(this.mockData.authors),
       position: getRandomItem<Position>(this.mockData.positions),
       commentCount: getRandomValue(5, 10)
     };

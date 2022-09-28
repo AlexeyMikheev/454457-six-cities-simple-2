@@ -1,9 +1,9 @@
-import { Author } from '../../types/author-type.js';
-import AuthorStatusMapper from './author-status-mapper.js';
+import UserStatusMapper from './user-status-mapper.js';
 import { MapperInterface } from './mapper.interface.js';
+import UserDto from '../../modules/user/dto/user.dto.js';
 
-class AuthorMapper implements MapperInterface<Author> {
-  private statusMapper = new AuthorStatusMapper();
+class UserMapper implements MapperInterface<UserDto> {
+  private statusMapper = new UserStatusMapper();
   constructor(private readonly separator = ';') { }
 
   public mapToItem(data: string) {
@@ -26,7 +26,7 @@ class AuthorMapper implements MapperInterface<Author> {
     };
   }
 
-  public mapToString(data: Author): string {
+  public mapToString(data: UserDto): string {
     return [
       data.name,
       data.email,
@@ -37,4 +37,4 @@ class AuthorMapper implements MapperInterface<Author> {
   }
 }
 
-export default AuthorMapper;
+export default UserMapper;

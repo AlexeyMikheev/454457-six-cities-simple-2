@@ -41,10 +41,12 @@
     "npm": "^8.1.0"
   },
   "dependencies": {
+    "@typegoose/typegoose": "9.12.1",
     "chalk": "5.0.1",
+    "crypto": "1.0.1",
     "got": "12.4.1",
-    "mongoose": "6.6.2",
     "inversify": "6.0.1",
+    "mongoose": "6.6.2",
     "pino": "8.5.0",
     "reflect-metadata": "0.1.13"
   }

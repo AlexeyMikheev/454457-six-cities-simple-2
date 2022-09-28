@@ -4,7 +4,8 @@ import { drawRed } from '../../utils/text.js';
 import { FileReaderInterface } from './file-reader.interface.js';
 
 export enum FileReaderEvents {
-  OnLineRead = 'OnLineRead'
+  OnLineRead = 'OnLineRead',
+  OnLinesRead = 'OnLinesRead',
 }
 
 class FileReader extends EventEmitter implements FileReaderInterface<string> {
@@ -52,6 +53,8 @@ class FileReader extends EventEmitter implements FileReaderInterface<string> {
         temp = temp.slice(++index);
       }
     }
+
+    this.emit(FileReaderEvents.OnLinesRead);
   }
 }
 
