@@ -3,6 +3,7 @@ import Application from '../../app/application.js';
 import { INJECT_KEYS } from '../../types/inject-type.enum.js';
 import { ConfigInterface } from '../config-service/config.interface.js';
 import ConfigService from '../config-service/config.service.js';
+import DatabseService from '../database-service/database-service.js';
 import { LoggerInterface } from '../logger-service/logger-service.interface.js';
 import LoggerService from '../logger-service/logger.service.js';
 
@@ -15,6 +16,7 @@ class Bootstrap {
     container.bind<Application>(INJECT_KEYS.Application).to(Application);
     container.bind<LoggerInterface>(INJECT_KEYS.LoggerInterface).to(LoggerService);
     container.bind<ConfigInterface>(INJECT_KEYS.ConfigInterface).to(ConfigService);
+    container.bind<DatabseService>(INJECT_KEYS.DatabaseInterface).to(DatabseService);
 
     return container;
   }

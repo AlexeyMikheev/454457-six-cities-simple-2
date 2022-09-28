@@ -7,6 +7,10 @@ export type ConfigSchema = {
   PORT: number;
   SALT: string;
   DB_HOST: string;
+  DB_USER: string;
+  DB_PASSWORD: string;
+  DB_PORT: string;
+  DB_NAME: string;
 };
 
 export type ConfigSchemaKey = keyof ConfigSchema;
@@ -30,4 +34,28 @@ export const configSchema = convict<ConfigSchema>({
     default: '127.0.0.1',
     env: 'DB_HOST'
   },
+  DB_USER: {
+    doc: 'User name to connect to MongoDb',
+    format: String,
+    env: 'DB_USER',
+    default: null
+  },
+  DB_PASSWORD: {
+    doc: 'User password to connect to MongoDb',
+    format: String,
+    env: 'DB_PASSWORD',
+    default: null
+  },
+  DB_PORT: {
+    doc: 'Port to connect to MongoDb',
+    format: 'port',
+    env: 'DB_PORT',
+    default: null
+  },
+  DB_NAME: {
+    doc: 'Database name to connect to MongoDb',
+    format: String,
+    env: 'DB_NAME',
+    default: 'course-nodejs-restapi'
+  }
 });
