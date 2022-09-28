@@ -3,7 +3,7 @@ import { CityType } from './city-type.enum.js';
 import { OfferType } from './offer-type.enum.js';
 
 export type Offer = {
-    name: string;
+    title: string;
     description: string;
     date: Date;
     city: CityType;

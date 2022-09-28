@@ -1,6 +1,6 @@
-import TextFormatter from '../text-formatter.js';
+import { drawRed } from '../../utils/text.js';
 
-export default class JsonParser<T>  {
+class JsonParser<T>  {
   private data?: T;
 
   constructor(public readonly content: string) { }
@@ -13,7 +13,9 @@ export default class JsonParser<T>  {
     try {
       this.data = JSON.parse(this.content);
     } catch (error) {
-      console.log(TextFormatter.drawRed(error));
+      console.log(drawRed(error));
     }
   }
 }
+
+export default JsonParser;

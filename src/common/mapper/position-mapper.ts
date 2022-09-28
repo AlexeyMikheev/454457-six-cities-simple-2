@@ -1,10 +1,10 @@
 import { Position } from '../../types/position-type.js';
-import TextFormatter from '../text-formatter.js';
 import { MapperInterface } from './mapper.interface.js';
 
-export default class PositionMapper implements MapperInterface<Position> {
+class PositionMapper implements MapperInterface<Position> {
+  constructor(private readonly separator = ';') { }
   public mapToItem(data: string) {
-    const values = TextFormatter.stringToArray(data, ';');
+    const values = data?.split(this.separator);
 
     if (values?.length !== 2) {
       throw new Error(`В значение ${data} не удалось определить Position`);
@@ -20,11 +20,21 @@ export default class PositionMapper implements MapperInterface<Position> {
     }
 
     if (!lon || Number.isNaN(lon)) {
-      throw new Error(`В значение ${lonString} удалось определить latitude для Position`);
+      throw new Error(`В значение ${lonString} удалось определить longitude для Position`);
     }
 
     const position: Position = [lat, lon];
 
     return position;
   }
+
+  public mapToString(data: Position): string {
+    if (!data) {
+      throw new Error(`Значение ${data} не определено`);
+    }
+
+    return data.join(this.separator);
+  }
 }
+
+export default PositionMapper;

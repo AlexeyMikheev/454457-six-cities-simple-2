@@ -1,13 +1,13 @@
 import { Author } from '../../types/author-type.js';
-import TextFormatter from '../text-formatter.js';
 import AuthorStatusMapper from './author-status-mapper.js';
 import { MapperInterface } from './mapper.interface.js';
 
-export default class AuthorMapper implements MapperInterface<Author> {
+class AuthorMapper implements MapperInterface<Author> {
   private statusMapper = new AuthorStatusMapper();
+  constructor(private readonly separator = ';') { }
 
   public mapToItem(data: string) {
-    const values = TextFormatter.stringToArray(data, ';');
+    const values = data?.split(this.separator);
 
     const [
       name,
@@ -25,4 +25,16 @@ export default class AuthorMapper implements MapperInterface<Author> {
       status: this.statusMapper.mapToItem(status)
     };
   }
+
+  public mapToString(data: Author): string {
+    return [
+      data.name,
+      data.email,
+      data.avatar,
+      data.password,
+      this.statusMapper.mapToString(data.status),
+    ].join(this.separator);
+  }
 }
+
+export default AuthorMapper;

@@ -4,9 +4,11 @@
 /lib/
 /dist/
 /docs/
+/mongodb
 /mocks/*.tsv
 .idea/*
 
 .DS_Store
 coverage
 *.log
+*.tsv

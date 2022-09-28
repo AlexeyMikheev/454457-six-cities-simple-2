@@ -1,5 +1,5 @@
-import TSVParserM from '../common/parser/tsv-parser.js';
-import FileReader from '../common/file-reader/file-reader.js';
+import TSVParser from '../common/parser/tsv-parser.js';
+import FileReader, { FileReaderEvents } from '../common/file-reader/file-reader.js';
 import CityTypeMapper from '../common/mapper/city-type-mapper.js';
 import OfferMapper from '../common/mapper/offer-mapper.js';
 import OfferTypeMapper from '../common/mapper/offer-type-mapper.js';
@@ -9,18 +9,12 @@ import { CliCommandInterface } from './cli-command.interface.js';
 import PositionMapper from '../common/mapper/position-mapper.js';
 import AuthorMapper from '../common/mapper/author-mapper.js';
 
-export default class ImportCommand implements CliCommandInterface {
+class ImportCommand implements CliCommandInterface {
   public readonly name: CommandType = CommandType.Import;
 
-  private readFile(path: string) {
-    let data;
-
-    const fileReader = new FileReader(path);
-    fileReader.readFile();
-    const file = fileReader.getData();
-
-    if (file) {
-      const parser = new TSVParserM<Offer>(file);
+  private handleLineRead(line: string) {
+    if (line) {
+      const parser = new TSVParser<Offer>(line);
       parser.parse(new OfferMapper(
         new CityTypeMapper,
         new OfferTypeMapper,
@@ -28,13 +22,21 @@ export default class ImportCommand implements CliCommandInterface {
         new AuthorMapper
       ));
 
-      data = parser.getData();
-    }
+      const data = parser.getData();
 
-    return data;
+      console.log(data);
+    }
+  }
+
+  private readFile(path: string) {
+    const fileReader = new FileReader(path);
+    fileReader.on(FileReaderEvents.OnLineRead, this.handleLineRead);
+    fileReader.readFileParts();
   }
 
   execute(path: string) {
-    console.log(this.readFile(path));
+    this.readFile(path);
   }
 }
+
+export default ImportCommand;
