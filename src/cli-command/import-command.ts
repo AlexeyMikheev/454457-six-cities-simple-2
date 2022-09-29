@@ -49,9 +49,10 @@ class ImportCommand implements CliCommandInterface {
 
       const data = parser.getData();
 
-      if (data?.user) {
-        await this.userService.findOrCreate(data.user, this.config.get('SALT'));
-        console.log(data);
+      if (data) {
+        const user = await this.userService.findOrCreate(data.user, this.config.get('SALT'));
+        console.log('data', data);
+        console.log('user isNew', user.isNew);
         resolve();
       }
     }
