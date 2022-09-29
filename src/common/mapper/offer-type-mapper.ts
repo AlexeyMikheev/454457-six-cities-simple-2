@@ -2,7 +2,7 @@ import { OfferType } from '../../types/offer-type.enum.js';
 import { MapperInterface } from './mapper.interface.js';
 
 class OfferTypeMapper implements MapperInterface<OfferType> {
-  public mapToItem(data: string) {
+  public mapToModel(data: string) {
     switch (data?.toLowerCase()) {
       case OfferType.Apartment: return OfferType.Apartment;
       case OfferType.House: return OfferType.House;

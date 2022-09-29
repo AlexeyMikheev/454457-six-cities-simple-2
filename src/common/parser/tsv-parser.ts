@@ -12,7 +12,7 @@ class TSVParser<T>  {
 
   public parse(mapper: MapperInterface<T>) {
     try {
-      this.data = mapper.mapToItem(this.content);
+      this.data = mapper.mapToModel(this.content);
     }
     catch (error) {
       console.log(drawRed(error));

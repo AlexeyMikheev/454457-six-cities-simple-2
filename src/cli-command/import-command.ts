@@ -22,6 +22,8 @@ import { getOpts, getUri } from '../utils/db.js';
 import { OfferServiceInterface } from '../modules/offer/offer-service.interface.js';
 import OfferService from '../modules/offer/offer-service.js';
 import { OfferModel } from '../modules/offer/offer.entity.js';
+import { CITY_POSITION } from '../types/city.enum.js';
+import FeatureMapper from '../common/mapper/feature-mapper.js';
 
 class ImportCommand implements CliCommandInterface {
   public readonly name: CommandType = CommandType.Import;
@@ -36,8 +38,8 @@ class ImportCommand implements CliCommandInterface {
     this.handleLinesRead = this.handleLinesRead.bind(this);
 
     this.logger = new LoggerService();
-    this.userService = new UserService(this.logger, UserModel);
-    this.offerService = new OfferService(this.logger, OfferModel);
+    this.userService = new UserService(UserModel);
+    this.offerService = new OfferService(OfferModel);
     this.config = new ConfigService(this.logger);
     this.databaseService = new DatabaseService(this.logger, this.config);
   }
@@ -49,7 +51,8 @@ class ImportCommand implements CliCommandInterface {
         new CityMapper(),
         new OfferTypeMapper(),
         new PositionMapper(),
-        new UserMapper()
+        new UserMapper(),
+        new FeatureMapper()
       ));
 
       const data = parser.getData();
@@ -60,11 +63,24 @@ class ImportCommand implements CliCommandInterface {
 
           const offer = await this.offerService.create({
             title: data.title,
-            userId: user?.id
+            description: data.description,
+            date: data.date,
+            city: data.city,
+            preview: data.preview,
+            images: data.images,
+            isPremium: data.isPremium,
+            rating: data.rating,
+            type: data.type,
+            room: data.room,
+            guest: data.guest,
+            price: data.price,
+            features: data.features,
+            userId: user?.id,
+            position: CITY_POSITION[data.city]
           });
 
-          if(offer?.id){
-            this.logger.info(`Offer created ${offer.id}-${offer.title}`);
+          if (offer?.id) {
+            this.logger.info(`Offer created ${offer.id}`);
           }
 
         } catch (error) {

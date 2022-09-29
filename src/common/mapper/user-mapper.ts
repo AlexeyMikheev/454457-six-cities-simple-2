@@ -6,7 +6,7 @@ class UserMapper implements MapperInterface<UserDto> {
   private statusMapper = new UserStatusMapper();
   constructor(private readonly separator = ';') { }
 
-  public mapToItem(data: string) {
+  public mapToModel(data: string) {
     const values = data?.split(this.separator);
 
     const [
@@ -22,7 +22,7 @@ class UserMapper implements MapperInterface<UserDto> {
       email,
       avatar,
       password,
-      status: this.statusMapper.mapToItem(status)
+      status: this.statusMapper.mapToModel(status)
     };
   }
 

@@ -4,6 +4,7 @@ import { OfferType } from '../../types/offer-type.enum.js';
 import { City } from '../../types/city.enum.js';
 import { Position } from '../../types/position-type.js';
 import { User } from '../../types/user-type.js';
+import { Feature } from '../../types/feature.enum.js';
 
 class OfferMapper implements MapperInterface<Offer> {
   constructor(
@@ -11,10 +12,11 @@ class OfferMapper implements MapperInterface<Offer> {
     private offerTypeMapper: MapperInterface<OfferType>,
     private positionMapper: MapperInterface<Position>,
     private userMapper: MapperInterface<User>,
+    private featureMapper: MapperInterface<Feature[]>,
     private readonly separator = '\t',
   ) { }
 
-  public mapToItem(value: string) {
+  public mapToModel(value: string) {
     const values: string[] = value.split(this.separator);
 
     const [
@@ -40,19 +42,19 @@ class OfferMapper implements MapperInterface<Offer> {
       title,
       description,
       date: new Date(date),
-      city: this.cityMapper.mapToItem(city),
+      city: this.cityMapper.mapToModel(city),
       preview,
       images: images?.split(';'),
       isPremium: !!isPremium,
       rating: Number.parseInt(rating, 10),
-      type: this.offerTypeMapper.mapToItem(type),
+      type: this.offerTypeMapper.mapToModel(type),
       room: Number.parseInt(room, 10),
       guest: Number.parseInt(guest, 10),
       price: Number.parseInt(price, 10),
-      features: features?.split(';'),
-      user: this.userMapper.mapToItem(user),
+      features: this.featureMapper.mapToModel(features),
+      user: this.userMapper.mapToModel(user),
       commentCount: Number.parseInt(commentCount, 10),
-      position: this.positionMapper.mapToItem(position) || [0, 0]
+      position: this.positionMapper.mapToModel(position) || [0, 0]
     };
   }
 

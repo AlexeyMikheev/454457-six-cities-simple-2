@@ -11,6 +11,7 @@ import CityMapper from '../common/mapper/city-mapper.js';
 import OfferTypeMapper from '../common/mapper/offer-type-mapper.js';
 import PositionMapper from '../common/mapper/position-mapper.js';
 import UserMapper from '../common/mapper/user-mapper.js';
+import FeatureMapper from '../common/mapper/feature-mapper.js';
 
 class GenerateCommand implements CliCommandInterface {
   public readonly name = CommandType.Generate;
@@ -28,7 +29,8 @@ class GenerateCommand implements CliCommandInterface {
         new CityMapper(),
         new OfferTypeMapper(),
         new PositionMapper(),
-        new UserMapper()
+        new UserMapper(),
+        new FeatureMapper()
       );
 
       if (existsSync(filePath)) {

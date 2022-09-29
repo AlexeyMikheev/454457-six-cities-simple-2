@@ -1,4 +1,4 @@
 export interface MapperInterface<T> {
-    mapToItem(data: string): T;
+    mapToModel(data: string): T;
     mapToString(data: T): string;
 }

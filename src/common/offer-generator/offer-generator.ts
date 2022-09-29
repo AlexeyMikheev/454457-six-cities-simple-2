@@ -11,6 +11,7 @@ import { RoomLimit } from '../../types/room-limit.enum.js';
 import { getRandomItem, getRandomItems, getRandomValue } from '../../utils/random.js';
 import { MapperInterface } from '../mapper/mapper.interface.js';
 import { OfferGeneratorInterface } from './offer-generator.interface.js';
+import { Feature } from '../../types/feature.enum.js';
 
 class OfferGenerator implements OfferGeneratorInterface {
   constructor(private readonly mockData: MockData) { }
@@ -29,7 +30,7 @@ class OfferGenerator implements OfferGeneratorInterface {
       room: getRandomValue(RoomLimit.Min, RoomLimit.Max),
       guest: getRandomValue(GuestLimit.Min, GuestLimit.Max),
       price: getRandomValue(PriceLimit.Min, PriceLimit.Max),
-      features: getRandomItems<string>(this.mockData.features),
+      features: getRandomItems<Feature>(this.mockData.features),
       user: getRandomItem<User>(this.mockData.authors),
       position: getRandomItem<Position>(this.mockData.positions),
       commentCount: getRandomValue(5, 10)

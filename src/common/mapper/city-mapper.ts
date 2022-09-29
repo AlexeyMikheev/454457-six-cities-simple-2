@@ -2,7 +2,7 @@ import { City } from '../../types/city.enum.js';
 import { MapperInterface } from './mapper.interface.js';
 
 class CityMapper implements MapperInterface<City> {
-  public mapToItem(data: string) {
+  public mapToModel(data: string) {
     switch (data) {
       case City.Paris: return City.Paris;
       case City.Cologne: return City.Cologne;
@@ -10,7 +10,7 @@ class CityMapper implements MapperInterface<City> {
       case City.Amsterdam: return City.Amsterdam;
       case City.Hamburg: return City.Hamburg;
       case City.Dusseldorf: return City.Dusseldorf;
-      default: throw new Error(`Значение ${data} не определено в CityType`);
+      default: throw new Error(`Значение ${data} не определено в City`);
     }
   }
 

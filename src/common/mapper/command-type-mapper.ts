@@ -2,7 +2,7 @@ import { CommandType } from '../../types/command-type.enum.js';
 import { MapperInterface } from './mapper.interface.js';
 
 class CommandTypeMapper implements MapperInterface<CommandType> {
-  public mapToItem(data: string) {
+  public mapToModel(data: string) {
     switch (data.toLowerCase()) {
       case CommandType.Help: return CommandType.Help;
       case CommandType.Version: return CommandType.Version;

@@ -2,7 +2,7 @@ import { UserStatus } from '../../types/user-status.enum.js';
 import { MapperInterface } from './mapper.interface.js';
 
 class UserStatusMapper implements MapperInterface<UserStatus> {
-  public mapToItem(data: string) {
+  public mapToModel(data: string) {
     switch (data.toLowerCase()) {
       case UserStatus.Standart: return UserStatus.Standart;
       case UserStatus.Pro: return UserStatus.Pro;

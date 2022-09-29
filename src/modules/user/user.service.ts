@@ -4,12 +4,10 @@ import UserDto from './dto/user.dto.js';
 import { UserServiceInterface } from './user-service.interface.js';
 import { inject, injectable } from 'inversify';
 import { INJECT_KEYS } from '../../types/inject-type.enum.js';
-import { LoggerInterface } from '../../common/logger-service/logger-service.interface.js';
 
 @injectable()
 class UserService implements UserServiceInterface {
   constructor(
-    @inject(INJECT_KEYS.LoggerInterface) private logger: LoggerInterface,
     @inject(INJECT_KEYS.UserModel) private readonly userModel: types.ModelType<UserEntity>
   ) { }
 
@@ -18,7 +16,6 @@ class UserService implements UserServiceInterface {
     user.setPassword(dto.password, salt);
 
     const result = await this.userModel.create(user);
-    this.logger.info(`New user created ${result.name}`);
     return result;
   }
 

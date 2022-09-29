@@ -3,7 +3,7 @@ import { MapperInterface } from './mapper.interface.js';
 
 class PositionMapper implements MapperInterface<Position> {
   constructor(private readonly separator = ';') { }
-  public mapToItem(data: string) {
+  public mapToModel(data: string) {
     const values = data?.split(this.separator);
 
     if (values?.length !== 2) {

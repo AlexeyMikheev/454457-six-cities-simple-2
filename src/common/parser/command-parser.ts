@@ -17,7 +17,7 @@ class CommandParser {
 
     const [commandValue, ...commandArgs] = this.content;
 
-    const commandType = mapper.mapToItem(commandValue.replace('--', '')) || CommandType.Help;
+    const commandType = mapper.mapToModel(commandValue.replace('--', '')) || CommandType.Help;
 
     this.data = [commandType, commandArgs];
   }

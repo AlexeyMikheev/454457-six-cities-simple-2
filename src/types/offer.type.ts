@@ -1,6 +1,7 @@
 import { User } from './user-type.js';
 import { City } from './city.enum.js';
 import { OfferType } from './offer-type.enum.js';
+import { Feature } from './feature.enum.js';
 
 export type Offer = {
     title: string;
@@ -15,7 +16,7 @@ export type Offer = {
     room: number;
     guest: number;
     price: number;
-    features: string[];
+    features: Feature[];
     user: User;
     commentCount: number;
     position: [number, number];
