@@ -47,7 +47,9 @@ class FileReader extends EventEmitter implements FileReaderInterface<string> {
         const readyPart = temp.slice(0, index);
 
         if (this.listenerCount(FileReaderEvents.OnLineRead)) {
-          this.emit(FileReaderEvents.OnLineRead, readyPart);
+          await new Promise((resolve) => {
+            this.emit(FileReaderEvents.OnLineRead, readyPart, () => resolve(true));
+          });
         }
 
         temp = temp.slice(++index);

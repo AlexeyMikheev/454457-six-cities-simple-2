@@ -30,7 +30,7 @@ class OfferGenerator implements OfferGeneratorInterface {
       guest: getRandomValue(GuestLimit.Min, GuestLimit.Max),
       price: getRandomValue(PriceLimit.Min, PriceLimit.Max),
       features: getRandomItems<string>(this.mockData.features),
-      author: getRandomItem<User>(this.mockData.authors),
+      user: getRandomItem<User>(this.mockData.authors),
       position: getRandomItem<Position>(this.mockData.positions),
       commentCount: getRandomValue(5, 10)
     };

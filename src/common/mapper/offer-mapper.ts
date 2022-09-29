@@ -4,7 +4,6 @@ import { OfferType } from '../../types/offer-type.enum.js';
 import { CityType } from '../../types/city-type.enum.js';
 import { Position } from '../../types/position-type.js';
 import UserDto from '../../modules/user/dto/user.dto.js';
-import { AnyArray } from 'mongoose';
 
 class OfferMapper implements MapperInterface<Offer> {
   constructor(
@@ -32,7 +31,7 @@ class OfferMapper implements MapperInterface<Offer> {
       guest,
       price,
       features,
-      author,
+      user,
       commentCount,
       position
     ] = values;
@@ -51,7 +50,7 @@ class OfferMapper implements MapperInterface<Offer> {
       guest: Number.parseInt(guest, 10),
       price: Number.parseInt(price, 10),
       features: features?.split(';'),
-      author: this.authorMapper.mapToItem(author),
+      user: this.authorMapper.mapToItem(user),
       commentCount: Number.parseInt(commentCount, 10),
       position: this.positionMapper.mapToItem(position) || [0, 0]
     };
@@ -72,7 +71,7 @@ class OfferMapper implements MapperInterface<Offer> {
       data.guest,
       data.price,
       data.features.join(';'),
-      this.authorMapper.mapToString(data.author as any),
+      this.authorMapper.mapToString(data.user),
       data.commentCount,
       this.positionMapper.mapToString(data.position),
     ].join(this.separator);

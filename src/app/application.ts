@@ -4,6 +4,7 @@ import { ConfigInterface } from '../common/config-service/config.interface.js';
 import { LoggerInterface } from '../common/logger-service/logger-service.interface.js';
 import { INJECT_KEYS } from '../types/inject-type.enum.js';
 import { DatabaseInterface } from '../common/database-service/database.interface.js';
+import { getOpts, getUri } from '../utils/db.js';
 
 @injectable()
 class Application {
@@ -19,7 +20,10 @@ class Application {
     this.logger.info(`Get value from .env $SALT ${this.config.get('SALT')}`);
     this.logger.info(`Get value from .env $DB_HOST ${this.config.get('DB_HOST')}`);
 
-    await this.databaseService.connect();
+    const uri = getUri(this.config.get('DB_HOST'), this.config.get('DB_PORT'), this.config.get('DB_NAME'));
+    const opts = getOpts(this.config.get('DB_USER'), this.config.get('DB_PASSWORD'), 'admin');
+
+    await this.databaseService.connect(uri, opts);
   }
 }
 

@@ -5,7 +5,6 @@ import { UserServiceInterface } from './user-service.interface.js';
 import { inject, injectable } from 'inversify';
 import { INJECT_KEYS } from '../../types/inject-type.enum.js';
 import { LoggerInterface } from '../../common/logger-service/logger-service.interface.js';
-import { getErrorMessage } from '../../utils/common.js';
 
 @injectable()
 class UserService implements UserServiceInterface {
@@ -15,7 +14,7 @@ class UserService implements UserServiceInterface {
 
   public async create(dto: UserDto, salt: string): Promise<DocumentType<UserEntity>> {
     const user = new UserEntity(dto);
-    // user.setPassword(dto.password, salt);
+    user.setPassword(dto.password, salt);
 
     const result = await this.userModel.create(user);
 

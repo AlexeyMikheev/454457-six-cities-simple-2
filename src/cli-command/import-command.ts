@@ -18,6 +18,7 @@ import DatabaseService from '../common/database-service/database-service.js';
 import { ConfigInterface } from '../common/config-service/config.interface.js';
 import ConfigService from '../common/config-service/config.service.js';
 import { getErrorMessage } from '../utils/common.js';
+import { getOpts, getUri } from '../utils/db.js';
 
 class ImportCommand implements CliCommandInterface {
   public readonly name: CommandType = CommandType.Import;
@@ -36,7 +37,7 @@ class ImportCommand implements CliCommandInterface {
     this.databaseService = new DatabaseService(this.logger, this.config);
   }
 
-  private async handleLineRead(line: string) {
+  private async handleLineRead(line: string, resolve: () => void) {
     if (line) {
       const parser = new TSVParser<Offer>(line);
       parser.parse(new OfferMapper(
@@ -48,12 +49,11 @@ class ImportCommand implements CliCommandInterface {
 
       const data = parser.getData();
 
-      if (data?.author) {
-        this.userService.findOrCreate({ name: 'test' } as any, this.config.get('SALT'));
-        // resolve();
+      if (data?.user) {
+        await this.userService.findOrCreate(data.user, this.config.get('SALT'));
+        console.log(data);
+        resolve();
       }
-
-      console.log(data);
     }
   }
 
@@ -69,13 +69,16 @@ class ImportCommand implements CliCommandInterface {
   }
 
   async execute(path: string) {
+    const uri = getUri(this.config.get('DB_HOST'), this.config.get('DB_PORT'), this.config.get('DB_NAME'));
+    const opts = getOpts(this.config.get('DB_USER'), this.config.get('DB_PASSWORD'), 'admin');
+
     try {
-      this.databaseService.connect();
-      this.userService.findOrCreate({ name: 'test' } as any, '123');
-      // await this.readFile(path);
-      this.databaseService.disconect();
+      this.databaseService.connect(uri, opts);
+      await this.readFile(path);
     } catch (e) {
       this.logger.error(getErrorMessage(e));
+    } finally {
+      this.databaseService.disconect();
     }
   }
 }
