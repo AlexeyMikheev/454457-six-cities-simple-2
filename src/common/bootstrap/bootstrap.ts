@@ -1,5 +1,8 @@
 import { Container } from 'inversify';
 import Application from '../../app/application.js';
+import { OfferServiceInterface } from '../../modules/offer/offer-service.interface.js';
+import OfferService from '../../modules/offer/offer-service.js';
+import { OfferEntity, OfferModel } from '../../modules/offer/offer.entity.js';
 import { UserServiceInterface } from '../../modules/user/user-service.interface.js';
 import { UserEntity, UserModel } from '../../modules/user/user.entity.js';
 import UserService from '../../modules/user/user.service.js';
@@ -21,7 +24,9 @@ class Bootstrap {
     container.bind<ConfigInterface>(INJECT_KEYS.ConfigInterface).to(ConfigService);
     container.bind<DatabaseService>(INJECT_KEYS.DatabaseInterface).to(DatabaseService);
     container.bind<UserServiceInterface>(INJECT_KEYS.UserService).to(UserService);
-    container.bind<UserEntity>(INJECT_KEYS.UserService).to(UserModel);
+    container.bind<UserEntity>(INJECT_KEYS.UserModel).to(UserModel);
+    container.bind<OfferEntity>(INJECT_KEYS.OfferModel).to(OfferModel);
+    container.bind<OfferServiceInterface>(INJECT_KEYS.OfferModel).to(OfferService);
 
     return container;
   }

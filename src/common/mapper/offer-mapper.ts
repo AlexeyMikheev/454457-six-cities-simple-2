@@ -1,16 +1,16 @@
 import { Offer } from '../../types/offer.type.js';
 import { MapperInterface } from './mapper.interface.js';
 import { OfferType } from '../../types/offer-type.enum.js';
-import { CityType } from '../../types/city-type.enum.js';
+import { City } from '../../types/city.enum.js';
 import { Position } from '../../types/position-type.js';
-import UserDto from '../../modules/user/dto/user.dto.js';
+import { User } from '../../types/user-type.js';
 
 class OfferMapper implements MapperInterface<Offer> {
   constructor(
-    private cityMapper: MapperInterface<CityType>,
+    private cityMapper: MapperInterface<City>,
     private offerTypeMapper: MapperInterface<OfferType>,
     private positionMapper: MapperInterface<Position>,
-    private authorMapper: MapperInterface<UserDto>,
+    private userMapper: MapperInterface<User>,
     private readonly separator = '\t',
   ) { }
 
@@ -50,7 +50,7 @@ class OfferMapper implements MapperInterface<Offer> {
       guest: Number.parseInt(guest, 10),
       price: Number.parseInt(price, 10),
       features: features?.split(';'),
-      user: this.authorMapper.mapToItem(user),
+      user: this.userMapper.mapToItem(user),
       commentCount: Number.parseInt(commentCount, 10),
       position: this.positionMapper.mapToItem(position) || [0, 0]
     };
@@ -71,7 +71,7 @@ class OfferMapper implements MapperInterface<Offer> {
       data.guest,
       data.price,
       data.features.join(';'),
-      this.authorMapper.mapToString(data.user),
+      this.userMapper.mapToString(data.user),
       data.commentCount,
       this.positionMapper.mapToString(data.position),
     ].join(this.separator);

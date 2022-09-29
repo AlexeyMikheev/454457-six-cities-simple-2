@@ -10,14 +10,15 @@ import { LoggerInterface } from '../../common/logger-service/logger-service.inte
 class UserService implements UserServiceInterface {
   constructor(
     @inject(INJECT_KEYS.LoggerInterface) private logger: LoggerInterface,
-    @inject(INJECT_KEYS.UserModel) private readonly userModel: types.ModelType<UserEntity>) { }
+    @inject(INJECT_KEYS.UserModel) private readonly userModel: types.ModelType<UserEntity>
+  ) { }
 
   public async create(dto: UserDto, salt: string): Promise<DocumentType<UserEntity>> {
     const user = new UserEntity(dto);
     user.setPassword(dto.password, salt);
 
     const result = await this.userModel.create(user);
-
+    this.logger.info(`New user created ${result.name}`);
     return result;
   }
 
@@ -26,10 +27,10 @@ class UserService implements UserServiceInterface {
   }
 
   public async findOrCreate(dto: UserDto, salt: string): Promise<DocumentType<UserEntity>> {
-    const existedUser = await this.findByEmail(dto.email);
+    const user = await this.findByEmail(dto.email);
 
-    if (existedUser) {
-      return existedUser;
+    if (user) {
+      return user;
     }
 
     return this.create(dto, salt);

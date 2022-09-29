@@ -7,7 +7,7 @@ import { existsSync } from 'fs';
 import { truncate } from 'fs/promises';
 import OfferMapper from '../common/mapper/offer-mapper.js';
 import FileWriter from '../common/file-writer/file-writer.js';
-import CityTypeMapper from '../common/mapper/city-type-mapper.js';
+import CityMapper from '../common/mapper/city-mapper.js';
 import OfferTypeMapper from '../common/mapper/offer-type-mapper.js';
 import PositionMapper from '../common/mapper/position-mapper.js';
 import UserMapper from '../common/mapper/user-mapper.js';
@@ -25,7 +25,7 @@ class GenerateCommand implements CliCommandInterface {
     if (this.initialData) {
       const offerGenerator = new OfferGenerator(this.initialData);
       const offerMapper = new OfferMapper(
-        new CityTypeMapper(),
+        new CityMapper(),
         new OfferTypeMapper(),
         new PositionMapper(),
         new UserMapper()

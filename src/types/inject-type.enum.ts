@@ -5,6 +5,8 @@ export enum InjectType {
   DatabaseInterface = 'DatabaseInterface',
   UserService = 'UserService',
   UserModel = 'UserModel',
+  OfferModel = 'OfferModel',
+  OfferService = 'OfferService',
 }
 
 export type InjectKeys = { [key in InjectType]: symbol };
@@ -16,4 +18,6 @@ export const INJECT_KEYS: InjectKeys = {
   DatabaseInterface: Symbol.for(InjectType.DatabaseInterface),
   UserService: Symbol.for(InjectType.UserService),
   UserModel: Symbol.for(InjectType.UserModel),
+  OfferModel: Symbol.for(InjectType.OfferModel),
+  OfferService: Symbol.for(InjectType.OfferService),
 };

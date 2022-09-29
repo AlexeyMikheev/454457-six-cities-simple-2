@@ -4,7 +4,7 @@ import OfferMapper from '../common/mapper/offer-mapper.js';
 import { CommandType } from '../types/command-type.enum.js';
 import { Offer } from '../types/offer.type.js';
 import { CliCommandInterface } from './cli-command.interface.js';
-import CityTypeMapper from '../common/mapper/city-type-mapper.js';
+import CityMapper from '../common/mapper/city-mapper.js';
 import OfferTypeMapper from '../common/mapper/offer-type-mapper.js';
 import PositionMapper from '../common/mapper/position-mapper.js';
 import UserMapper from '../common/mapper/user-mapper.js';
@@ -19,11 +19,15 @@ import { ConfigInterface } from '../common/config-service/config.interface.js';
 import ConfigService from '../common/config-service/config.service.js';
 import { getErrorMessage } from '../utils/common.js';
 import { getOpts, getUri } from '../utils/db.js';
+import { OfferServiceInterface } from '../modules/offer/offer-service.interface.js';
+import OfferService from '../modules/offer/offer-service.js';
+import { OfferModel } from '../modules/offer/offer.entity.js';
 
 class ImportCommand implements CliCommandInterface {
   public readonly name: CommandType = CommandType.Import;
   private databaseService!: DatabaseInterface;
   private userService!: UserServiceInterface;
+  private offerService!: OfferServiceInterface;
   private logger: LoggerInterface;
   private config: ConfigInterface;
 
@@ -33,6 +37,7 @@ class ImportCommand implements CliCommandInterface {
 
     this.logger = new LoggerService();
     this.userService = new UserService(this.logger, UserModel);
+    this.offerService = new OfferService(this.logger, OfferModel);
     this.config = new ConfigService(this.logger);
     this.databaseService = new DatabaseService(this.logger, this.config);
   }
@@ -41,7 +46,7 @@ class ImportCommand implements CliCommandInterface {
     if (line) {
       const parser = new TSVParser<Offer>(line);
       parser.parse(new OfferMapper(
-        new CityTypeMapper(),
+        new CityMapper(),
         new OfferTypeMapper(),
         new PositionMapper(),
         new UserMapper()
@@ -50,10 +55,24 @@ class ImportCommand implements CliCommandInterface {
       const data = parser.getData();
 
       if (data) {
-        const user = await this.userService.findOrCreate(data.user, this.config.get('SALT'));
-        console.log('data', data);
-        console.log('user isNew', user.isNew);
-        resolve();
+        try {
+          const user = await this.userService.findOrCreate(data.user, this.config.get('SALT'));
+
+          const offer = await this.offerService.create({
+            title: data.title,
+            userId: user?.id
+          });
+
+          if(offer?.id){
+            this.logger.info(`Offer created ${offer.id}-${offer.title}`);
+          }
+
+        } catch (error) {
+          this.logger.error(getErrorMessage(error));
+        }
+        finally {
+          resolve();
+        }
       }
     }
   }

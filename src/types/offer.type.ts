@@ -1,12 +1,12 @@
 import { User } from './user-type.js';
-import { CityType } from './city-type.enum.js';
+import { City } from './city.enum.js';
 import { OfferType } from './offer-type.enum.js';
 
 export type Offer = {
     title: string;
     description: string;
     date: Date;
-    city: CityType;
+    city: City;
     preview: string;
     images: string[];
     isPremium: boolean;

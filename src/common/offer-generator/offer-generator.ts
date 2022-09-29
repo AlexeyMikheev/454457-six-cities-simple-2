@@ -1,5 +1,5 @@
 import { User } from '../../types/user-type.js';
-import { CityType } from '../../types/city-type.enum.js';
+import { City } from '../../types/city.enum.js';
 import { GuestLimit } from '../../types/guest-limit.enum.js';
 import { MockData } from '../../types/mock-data.type.js';
 import { OfferType } from '../../types/offer-type.enum.js';
@@ -20,7 +20,7 @@ class OfferGenerator implements OfferGeneratorInterface {
       title: getRandomItem<string>(this.mockData.titles),
       description: getRandomItem<string>(this.mockData.descriptions),
       date: new Date(),
-      city: getRandomItem<CityType>(this.mockData.cities as CityType[]),
+      city: getRandomItem<City>(this.mockData.cities as City[]),
       preview: getRandomItem<string>(this.mockData.previews),
       images: getRandomItems<string>(this.mockData.images),
       isPremium: Boolean(getRandomValue(0, 1)),
