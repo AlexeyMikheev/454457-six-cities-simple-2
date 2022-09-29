@@ -4,10 +4,6 @@ import OfferMapper from '../common/mapper/offer-mapper.js';
 import { CommandType } from '../types/command-type.enum.js';
 import { Offer } from '../types/offer.type.js';
 import { CliCommandInterface } from './cli-command.interface.js';
-import CityMapper from '../common/mapper/city-mapper.js';
-import OfferTypeMapper from '../common/mapper/offer-type-mapper.js';
-import PositionMapper from '../common/mapper/position-mapper.js';
-import UserMapper from '../common/mapper/user-mapper.js';
 import { DatabaseInterface } from '../common/database-service/database.interface.js';
 import { UserServiceInterface } from '../modules/user/user-service.interface.js';
 import UserService from '../modules/user/user.service.js';
@@ -23,7 +19,6 @@ import { OfferServiceInterface } from '../modules/offer/offer-service.interface.
 import OfferService from '../modules/offer/offer-service.js';
 import { OfferModel } from '../modules/offer/offer.entity.js';
 import { CITY_POSITION } from '../types/city.enum.js';
-import FeatureMapper from '../common/mapper/feature-mapper.js';
 
 class ImportCommand implements CliCommandInterface {
   public readonly name: CommandType = CommandType.Import;
@@ -47,13 +42,7 @@ class ImportCommand implements CliCommandInterface {
   private async handleLineRead(line: string, resolve: () => void) {
     if (line) {
       const parser = new TSVParser<Offer>(line);
-      parser.parse(new OfferMapper(
-        new CityMapper(),
-        new OfferTypeMapper(),
-        new PositionMapper(),
-        new UserMapper(),
-        new FeatureMapper()
-      ));
+      parser.parse(new OfferMapper());
 
       const data = parser.getData();
 

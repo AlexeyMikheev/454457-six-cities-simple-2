@@ -5,16 +5,26 @@ import { City } from '../../types/city.enum.js';
 import { Position } from '../../types/position-type.js';
 import { User } from '../../types/user-type.js';
 import { Feature } from '../../types/feature.enum.js';
+import CityMapper from './city-mapper.js';
+import OfferTypeMapper from './offer-type-mapper.js';
+import PositionMapper from './position-mapper.js';
+import UserMapper from './user-mapper.js';
+import FeatureMapper from './feature-mapper.js';
 
 class OfferMapper implements MapperInterface<Offer> {
-  constructor(
-    private cityMapper: MapperInterface<City>,
-    private offerTypeMapper: MapperInterface<OfferType>,
-    private positionMapper: MapperInterface<Position>,
-    private userMapper: MapperInterface<User>,
-    private featureMapper: MapperInterface<Feature[]>,
-    private readonly separator = '\t',
-  ) { }
+  private cityMapper!: MapperInterface<City>;
+  private offerTypeMapper!: MapperInterface<OfferType>;
+  private positionMapper!: MapperInterface<Position>;
+  private userMapper!: MapperInterface<User>;
+  private featureMapper!: MapperInterface<Feature[]>;
+
+  constructor(private readonly separator = '\t') {
+    this.cityMapper = new CityMapper();
+    this.offerTypeMapper = new OfferTypeMapper();
+    this.positionMapper = new PositionMapper();
+    this.userMapper = new UserMapper();
+    this.featureMapper = new FeatureMapper();
+  }
 
   public mapToModel(value: string) {
     const values: string[] = value.split(this.separator);
