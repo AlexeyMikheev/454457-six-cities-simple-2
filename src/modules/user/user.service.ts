@@ -11,8 +11,19 @@ class UserService implements UserServiceInterface {
     @inject(INJECT_KEYS.UserModel) private readonly userModel: types.ModelType<UserEntity>
   ) { }
 
+  private validate(dto: UserDto) {
+    const user = new UserEntity(dto);
+    return this.userModel.validate(user);
+  }
+
   public async create(dto: UserDto, salt: string): Promise<DocumentType<UserEntity>> {
     const user = new UserEntity(dto);
+    const errors = this.userModel.validate(user);
+
+    if (errors) {
+      throw (errors)
+    }
+
     user.setPassword(dto.password, salt);
 
     const result = await this.userModel.create(user);
