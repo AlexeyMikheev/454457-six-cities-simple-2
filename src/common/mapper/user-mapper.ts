@@ -1,8 +1,8 @@
 import UserStatusMapper from './user-status-mapper.js';
 import { MapperInterface } from './mapper.interface.js';
-import UserDto from '../../modules/user/dto/user.dto.js';
+import CreateUserDto from '../../modules/user/dto/user.dto.js';
 
-class UserMapper implements MapperInterface<UserDto> {
+class UserMapper implements MapperInterface<CreateUserDto> {
   private statusMapper = new UserStatusMapper();
   constructor(private readonly separator = ';') { }
 
@@ -26,7 +26,7 @@ class UserMapper implements MapperInterface<UserDto> {
     };
   }
 
-  public mapToString(data: UserDto): string {
+  public mapToString(data: CreateUserDto): string {
     return [
       data.name,
       data.email,

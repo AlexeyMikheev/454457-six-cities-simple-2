@@ -8,6 +8,9 @@ import { OfferEntity } from './offer.entity.js';
 
 class OfferService implements OfferServiceInterface {
   constructor(@inject(INJECT_KEYS.UserModel) private readonly offerModel: types.ModelType<OfferEntity>) { }
+  public async validate(dto: CreateOfferDto): Promise<void> {
+    await this.offerModel.validate(dto);
+  }
 
   async create(dto: CreateOfferDto): Promise<DocumentType<OfferEntity, BeAnObject>> {
     const result = await this.offerModel.create(dto);

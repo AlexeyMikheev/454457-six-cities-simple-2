@@ -48,9 +48,11 @@ class ImportCommand implements CliCommandInterface {
 
       if (data) {
         try {
-          const user = await this.userService.findOrCreate(data.user, this.config.get('SALT'));
+          await this.userService.validate(data.user);
 
-          const offer = await this.offerService.create({
+          const userEntity = await this.userService.findOrCreate(data.user, this.config.get('SALT'));
+
+          const offerDto = {
             title: data.title,
             description: data.description,
             date: data.date,
@@ -64,12 +66,16 @@ class ImportCommand implements CliCommandInterface {
             guest: data.guest,
             price: data.price,
             features: data.features,
-            userId: user?.id,
+            userId: userEntity.id,
             position: CITY_POSITION[data.city]
-          });
+          };
 
-          if (offer?.id) {
-            this.logger.info(`Offer created ${offer.id}`);
+          await this.offerService.validate(offerDto);
+
+          const offerEntity = await this.offerService.create(offerDto);
+
+          if (offerEntity?.id) {
+            this.logger.info(`Offer created ${offerEntity.id}`);
           }
 
         } catch (error) {

@@ -1,7 +1,7 @@
 import { UserStatus } from '../../../types/user-status.enum.js';
 import { User } from '../../../types/user-type.js';
 
-export class UserDto implements User {
+export class CreateUserDto implements User {
   public email!: string;
   public name!: string;
   public avatar!: string;
@@ -9,4 +9,4 @@ export class UserDto implements User {
   public password!: string;
 }
 
-export default UserDto;
+export default CreateUserDto;

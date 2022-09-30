@@ -12,7 +12,6 @@ export interface UserEntity extends defaultClasses.Base { }
     collection: 'users'
   }
 })
-
 export class UserEntity extends defaultClasses.TimeStamps implements User {
   constructor(data: User) {
     super();
@@ -20,6 +19,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
     this.email = data.email;
     this.name = data.name;
     this.avatar = data.avatar;
+    this.password = data.password;
     this.status = data.status;
   }
 
@@ -38,12 +38,8 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({ required: true, type: String, enum: UserStatus })
   public status!: UserStatus;
 
-  public setPassword(password: string, salt: string) {
-    this.password = createSHA256(password, salt);
-  }
-
-  public getPassword() {
-    return this.password;
+  public updatePasswordHash(salt: string) {
+    this.password = createSHA256(this.password, salt);
   }
 }
 
