@@ -31,19 +31,19 @@ export const configSchema = convict<ConfigSchema>({
   DB_HOST: {
     doc: 'Ip address of the database server (Mongo DB)',
     format: 'ipaddress',
-    default: '127.0.0.1',
+    default: '0.0.0.0',
     env: 'DB_HOST'
   },
   DB_USER: {
     doc: 'User name to connect to MongoDb',
     format: String,
-    env: 'DB_USER',
+    env: 'MONGO_INITDB_ROOT_USERNAME',
     default: null
   },
   DB_PASSWORD: {
     doc: 'User password to connect to MongoDb',
     format: String,
-    env: 'DB_PASSWORD',
+    env: 'MONGO_INITDB_ROOT_PASSWORD',
     default: null
   },
   DB_PORT: {
@@ -56,6 +56,6 @@ export const configSchema = convict<ConfigSchema>({
     doc: 'Database name to connect to MongoDb',
     format: String,
     env: 'DB_NAME',
-    default: 'course-nodejs-restapi'
+    default: null
   }
 });
